@@ -1,0 +1,148 @@
+#title {
+    margin-top: 12px;
+    background-color: #fff;
+    color: #000;
+
+}
+/*#menu {*/
+/*    border-top: solid 6px #f00;*/
+/*    background-color: #f00;*/
+/*    color: #fff;*/
+/*    height: 400px;*/
+/*}*/
+
+/*#menu a {*/
+/*    background-color: #f00;*/
+/*    color: #fff;*/
+/*    text-decoration: none;*/
+/*    display: block;*/
+/*}*/
+#menu a:hover {
+    background-color: #f00;
+    color: #ddd;
+    text-decoration:underline;
+    display: block;
+}
+
+#content {
+    background-color: #fff;
+    border-top: solid 6px #023a0b;
+
+}
+
+/* footer */
+#footer {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    margin_top: 20px;
+    text-align: center;
+    background-color: rgba(196, 189, 189, 0.62);
+    color: #0c0c0c;
+}
+/* profile image css*/
+.img-size {
+    max-width: 75px;
+    width:100%;
+    height: auto;
+}
+/*banner image layout */
+.img {
+    width:100%;
+    height: auto;
+    background-color: #008000ff;
+}
+/*Register form css */
+.register-items{
+    margin-bottom: 7px;
+}
+
+#reg-box{
+    padding: 15px;
+    border-width: 2px;
+    border-style: groove;
+    margin-bottom: 10px;
+
+}
+#fname-box{
+    margin-right: 15px;
+}
+#option{
+    margin-right: 15px;
+}
+#robotcheck{
+    margin-bottom: 3px;
+    margin-top: 7px;
+}
+
+/* button spacing*/
+#btnA{
+    margin: 2px;
+}
+
+/* text wrap for larger fields*/
+#break{
+    overflow-wrap: break-word;
+}
+/*popup display properties*/
+.popup {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    visibility: hidden;
+}
+/* popup inner properties */
+.popup .popupInner {
+    visibility: hidden;
+    width: auto;
+    height: auto;
+    background-color: rgba(7,4,85,1);
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 115%;
+    left: 40%;
+    margin-left: -80px;
+}
+/* popup padding */
+#searchPopup{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 1px;
+}
+/* close button on popup*/
+.close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+/* close button hover properties*/
+.close:hover,
+.close:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+
+}
+
+.friendlink {
+    color: whitesmoke;
+}
+
+.hintText {
+    margin-top: 6px;
+    margin-bottom: 0px;
+}
+
+
+
+
+
+

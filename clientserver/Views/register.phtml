@@ -1,0 +1,62 @@
+<?php require('template/header.phtml') ?>
+
+<h4>Register Your Details</h4>
+<p>Thank you for choosing to join friend finder, please register your personal details in the fields below then press submit:</p>
+
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
+    <div id="reg-box" class="col-sm-8" >
+        <div class="register-items">
+            <label for="firstname">First name:</label>
+            <input id="fname-box" type="text" name="firstname" placeholder="eg: john" required>
+            <label for="lastname">Last name:</label>
+            <input type="text" name="lastname" placeholder="eg: Johnson" required>
+        </div>
+        <div class="register-items">
+            <label for="username">Please select a username:</label>
+            <input type="text" name="username" placeholder="eg: JJonson948" required>
+        </div>
+        <div class="register-items">
+            <label for="email">Please enter an email address:</label>
+            <input type="email" name="email" placeholder="email@email.com" required>
+        </div>
+        <div class="register-items">
+            <label for="password">Please choose a password:</label>
+            <input type="password" name="password"  required>
+        </div>
+        <div class="register-items">
+            <label for="password">Please re-enter your password:</label>
+            <input type="password" name="password2" required>
+        </div>
+        <div class="register-items">
+        <label for="gender">Gender:</label>
+            <select name="gender" required>
+                <option value="" disabled selected hidden>Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <div class="register-items">
+            <label for="picture">Please upload a profile picture:</label>
+            <input type="file"  name="picture" required>
+        </div>
+        <div  class="register-items">
+            <p id="robotcheck">How do you spell orange(to check you are not a robot):</p>  <!--Basic anti spam check, ask user obvious question -->
+            <label for="orange">Orange</label>
+            <input id="option" type="radio" name="robotcheck" value="orange">
+            <label for="1">Not like this</label>
+            <input id="option" type="radio" name="robotcheck" value="1">
+            <label for="2">Definitely no like this</label>
+            <input type="radio" name="robotcheck" value="2">
+        </div>
+        <input type="submit" name="submit" value="submit" class="btn btn-dark">
+    </div>
+</form>
+
+<?php if (isset($view->message)) : ?>  <!--Displays error message if there is one to display -->
+<p><strong><?php echo $view->message; ?></strong></p>
+<?php endif; ?>
+
+
+
+<?php require('template/footer.phtml') ?>

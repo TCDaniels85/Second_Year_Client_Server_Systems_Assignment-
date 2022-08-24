@@ -1,0 +1,81 @@
+<?php require('template/header.phtml') ?>
+
+    <p>Please enter the details of the user you wish to search for in the text box. <?php if (!isset($_SESSION["login"])){echo 'Please log in for more search options.';} ?></p>
+
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    <div class="mb-3">
+        <input id="searchInput" type="text" placeholder="Search...." name="search" onkeyup="showHint(this.value)">
+        <button type="submit" name="submit"  class="btn btn-dark">Submit</button>
+        <p><span id="txtHint2"></span></p>
+<!-- div for live search popup results       -->
+        <div class="popup">
+            <div class="popupInner" id="searchPopup"><</div>
+        </div>
+    </div>
+
+<?php
+if (isset($_SESSION["login"])){
+    //Search options that only display if user is logged in
+echo '
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="options">Choose search filter:</label>
+        </div>
+        <select class="custom-select" name="options" id="memberfilter" >
+            <option selected value="first_name">First Name</option>
+            <option value="last_name">Last Name</option>
+            <option value="username">Username</option>
+            <option value="gender">Gender</option>
+        </select>
+    </div>
+ 
+    ';} ?>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="order">Sort by:</label>
+        </div>
+        <select class="custom-select" name="order" id="filter">
+            <option selected value="first_name ASC">First name A-Z</option>
+            <option value="first_name DESC">First name Z-A</option>
+            <option value="last_name ASC">Last name A-Z</option>
+            <option value="last_name DESC">Last name Z-A</option>
+            <option value="username ASC">username A-Z</option>
+            <option value="username DESC">username Z-A</option>
+        </select>
+    </div>
+</form>
+
+
+
+<?php
+if(!empty($view->userDataSet)){
+    if (!isset($_SESSION["login"])) {
+        foreach($view->userDataSet as $userData) {
+            //Loop to display selected fields from user data from data set if user not logged in
+            echo '<div class = "row border rounded-pill m-4">' .
+                '<div class="col-sm-2">' . '<img src="' . $userData->getPicture() . '" alt="User Picture" class="img-size"/></div>' .
+                '<div class="col-sm-2"><h6>Name</h6>' . $userData->getFirstName() . ' ' . $userData->getLastName()  . '</div>' .
+                '<div class="col-sm-2"><h6>Username</h6>' . $userData->getUsername()  . '</div>
+                </div>';
+        }
+    }else {
+        //Loop to display selected fields from user data from data set if user is logged in
+        foreach ($view->userDataSet as $userData) {
+            echo '<div class = "row border m-4">' .
+                '<div class="col-sm-4 col-md-1">' . '<img src="' . $userData->getPicture() . '" alt="User Picture" class="img-size"/></div>' .
+                '<div class="col-sm-4 col-md-2"><h6>Name</h6>' . $userData->getFirstName() . ' ' . $userData->getLastName() . '</div>' .
+                '<div class="col-sm-4 col-md-2"><h6>Username</h6>' . $userData->getUsername()  . '</div>' .
+                '<div id="break" class="col-sm-4 col-md-2"><h6>Gender</h6>' . $userData->getGender() . '</div>' .
+                '<div id="break" class="col-sm-4 col-md-3"><h6>email</h6>' . $userData->getEmail() . '</div>' .
+                '<div class="col-sm-4 col-md-2"><h6>Co-ordinates</h6>' . '<p>' . $userData->getLongitude() . '</p>'. $userData->getLatitude() . '</div>
+                </div>';
+        }
+    }
+}
+
+?>
+
+    <script src="/js/livesearch.js"></script>
+    <script src="/js/httprequest.js"></script>
+
+<?php require('template/footer.phtml') ?>

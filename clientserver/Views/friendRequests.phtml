@@ -1,0 +1,27 @@
+<?php require('template/header.phtml') ?>
+
+    <h3>Manage Friend Requests</h3>
+<p>Here you can find all the friend requests you have either sent or received.</p>
+
+<?php if (!isset($_SESSION["login"])){
+    //This message displays if user logs out on this page
+    echo '<p> Oops! you have no friends, please log in or create an account to see your friendships.</p>';
+} else
+{
+    //Loop to display selected fields from user's data from data set
+    foreach ($view->friendDataSet as $friendData) {
+        echo '<div class = "row border m-4">' .
+            '<div class="cols-sm-3 col-md-1 col-lg-1">' . '<img src="' . $friendData->getPicture() . '" alt="User Picture" class="img-size"/></div>' .
+            '<div class="cols-sm-3 col-md-2 col-lg-2"><h6>Name</h6>' . $friendData->getFirstName() . ' ' . $friendData->getLastName() . '</div>' .
+            '<div class="cols-sm-3 col-md-2 col-lg-2"><h6>Username</h6>' . $friendData->getUsername() . '</div>' .
+            '<div id="break" class="cols-sm-3 col-md-2 col-lg-1"><h6>Gender</h6>' . $friendData->getGender() . '</div>' .
+            '<div id="break" class="cols-sm-3 col-md-3 col-lg-2"><h6>email</h6>' . $friendData->getEmail() . '</div>' .
+            '<div class="cols-sm-6 col-md-2 col-lg-2"><h6>Co-ordinates</h6>' . '<p>' . $friendData->getLongitude() . '</p>' . $friendData->getLatitude() . '</div>' .
+            '<div class="cols-sm-6 col-md-12 col-lg-1"><h6>Status</h6>';?>
+        <?php if($friendData->getUser2() == $_SESSION["userID"]) {echo'<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><button type="submit" name="accept" value="' . $friendData->getUserID() . '" id="btnA" class="btn btn-dark">Accept</button><button type="submit" name="reject" value="' . $friendData->getUserID() . '" id="btnA" class="btn btn-dark">Reject</button></form>';}
+        else if ($friendData->getUser1() == $_SESSION["userID"]){echo'<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><p>Request sent</p><button type="submit" name="cancel" value="' . $friendData->getUserID() . '" id="btnA" class="btn btn-dark">Cancel Request</button></form>';}?><?php echo '</div>
+                </div>';
+    }
+} ?>
+
+<?php require('template/footer.phtml') ?>

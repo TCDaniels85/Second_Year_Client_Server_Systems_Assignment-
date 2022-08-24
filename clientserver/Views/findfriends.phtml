@@ -1,0 +1,65 @@
+<?php require('template/header.phtml') ?>
+
+    <p>Please enter the details of the user you wish to search for in the text box.</p>
+<?php
+if (isset($_SESSION["login"])){
+    //Only displays if user is logged in
+    echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">
+        <div class="mb-3">
+            <input type="text" placeholder="Search...." name="search">
+            <button type="submit" name="submit" class="btn btn-dark">Submit</button>
+        </div>
+        
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="options">Choose search filter:</label>
+        </div>
+        <select class="custom-select" name="options">
+            <option selected value="first_name">First Name</option>
+            <option value="last_name">Last Name</option>
+            <option value="username">Username</option>
+            <option value="gender">Gender</option>
+        </select>
+    </div>
+ 
+    
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="order">Sort by:</label>
+            </div>
+            <select class="custom-select" name="order">
+                <option selected value="first_name ASC">First name A-Z</option>
+                <option value="first_name DESC">First name Z-A</option>
+                <option value="last_name ASC">Last name A-Z</option>
+                <option value="last_name DESC">Last name Z-A</option>
+                <option value="username ASC">username A-Z</option>
+                <option value="username DESC">username Z-A</option>
+            </select>
+        </div>
+    </form>
+    ';} else {
+    //displays if user logs out on this screen
+    echo '<p> Oops! You are not logged in, please log in or create an account to begin finding friends.</p>';
+}?>
+<!-- Displays if view-> dataset has some data and if the user is logged in-->
+<?php
+if(!empty($view->friendDataSet)){
+    if (isset($_SESSION["login"])) {
+            foreach ($view->friendDataSet as $friendData) {
+                echo '<div class = "row border m-4">' .
+                    '<div class="cols-sm-3 col-md-1 col-lg-1">' . '<img src="' . $friendData->getPicture() . '" alt="User Picture" class="img-size"/></div>' .
+                    '<div class="cols-sm-3 col-md-2 col-lg-2"><h6>Name</h6>' . $friendData->getFirstName() . ' ' . $friendData->getLastName() . '</div>' .
+                    '<div class="cols-sm-3 col-md-2 col-lg-2"><h6>Username</h6>' . $friendData->getUsername() . '</div>' .
+                    '<div id="break" class="cols-sm-3 col-md-2 col-lg-1"><h6>Gender</h6>' . $friendData->getGender() . '</div>' .
+                    '<div id="break" class="cols-sm-3 col-md-3 col-lg-2"><h6>email</h6>' . $friendData->getEmail() . '</div>' .
+                    '<div class="cols-sm-6 col-md-2 col-lg-2"><h6>Co-ordinates</h6>' . '<p>' . $friendData->getLongitude() . '</p>' . $friendData->getLatitude() . '</div>' .
+                    '<div class="cols-sm-6 col-md-12 col-lg-1"><h6>Status</h6><form action="' . $_SERVER['PHP_SELF'] .
+                    '" method="post"><button type="submit" name="request" value="' . $friendData->getUserID() . '" id="btnA" class="btn btn-dark">Request Friendship</button>
+                    </form></div>
+                        </div>';
+
+            }
+    }
+}?>
+
+<?php require('template/footer.phtml') ?>

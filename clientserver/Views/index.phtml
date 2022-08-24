@@ -1,0 +1,45 @@
+<?php require('template/header.phtml') ?>
+
+
+
+<?php if (isset($_SESSION["login"])) {
+
+    echo '<h3>Welcome ' . $_SESSION["login"] . ' </h3 >';
+    } else {
+
+}?>
+<h4>Join the thousands of other people on Assingment today, make friends and track their location<i> (Pending implementation)</i></h4>
+<?php if (!isset($_SESSION["login"])){echo '<p>Please log in to start using looking for friends.</p>';} ?>
+<p>Here are some of the wonderful people currently using our service:</p>
+
+<div class="userlist">
+    <table>
+    <?php if (!isset($_SESSION["login"])) {
+        foreach($view->userDataSet as $userData) {
+            //Loop to display selected fields from user data from data set if user not logged in
+            echo '<div class = "row border rounded-pill m-4">' .
+                '<div class="col-sm-2">' . '<img src="' . $userData->getPicture() . '" alt="User Picture" class="img-size" /></div>' .
+                '<div class="col-sm-3"><h6>Name</h6>' . $userData->getFirstName() . ' ' . $userData->getLastName()  . '</div>' .
+                '<div class="col-sm-3"><h6>Username</h6>' . $userData->getUsername()  . '</div>
+                </div>';
+        }
+    }else {
+        //Loop to display selected fields from user data from data set if user is logged in
+        foreach ($view->userDataSet as $userData) {
+            echo '<div class = "row border m-4">' .
+                '<div class="col-sm-4 col-md-1">' . '<img src="' . $userData->getPicture() . '" alt="User Picture" class="img-size" /></div>' .
+                '<div class="col-sm-4 col-md-2"><h6>Name</h6>' . $userData->getFirstName() . ' ' . $userData->getLastName() . '</div>' .
+                '<div class="col-sm-4 col-md-2"><h6>Username</h6>' . $userData->getUsername()  . '</div>' .
+                '<div id="break" class="col-sm-4 col-md-2"><h6>Gender</h6>' . $userData->getGender() . '</div>' .
+                '<div id="break" class="col-sm-4 col-md-3"><h6>email</h6>' . $userData->getEmail() . '</div>' .
+                '<div class="col-sm-4 col-md-2"<h6>Co-ordinates</h6>' . '<p>' . $userData->getLongitude() . '</p>'. $userData->getLatitude() . '</div>          
+                </div>';
+         }
+    }
+        ?>
+    </table>
+</div>
+
+
+
+<?php require('template/footer.phtml') ?>
